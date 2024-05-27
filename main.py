@@ -48,25 +48,24 @@ left_paddle_scoreboard = scoreboard.Scoreboard('left')
 right_paddle_scoreboard = scoreboard.Scoreboard('right')
 
 # Simulate game
-game_is_on = True
-while game_is_on:
+while True:
     time.sleep(0.1)
     screen.update()
     ball.move()
 
     # Detect collision between ball and wall
-    if ball.ycor() > parameters.TOP_BOUNDARY - parameters.SIZE or ball.ycor() < parameters.BOTTOM_BOUNDARY + parameters.SIZE:
-        ball.rebound()
+    if ball.ycor() > parameters.TOP_BOUNDARY - parameters.BALL_SIZE or ball.ycor() < parameters.BOTTOM_BOUNDARY + parameters.BALL_SIZE:
+        ball.bounce_y()
 
     # Detect collision between ball and right paddle
     if ball.distance(
-            right_paddle) < parameters.SIZE * 3 and abs(ball.xcor() - right_paddle.xcor()) == parameters.SIZE:
-        ball.hit()
+            right_paddle) <= parameters.BALL_SIZE * (parameters.PADDLE_SIZE - 1) and abs(ball.xcor() - right_paddle.xcor()) == parameters.BALL_SIZE and ball.xcor() < right_paddle.xcor():
+        ball.bounce_x()
 
     # Detect collision between ball and left paddle
     if ball.distance(
-            left_paddle) < parameters.SIZE * 3 and abs(ball.xcor() - left_paddle.xcor()) == parameters.SIZE:
-        ball.hit()
+            left_paddle) <= parameters.BALL_SIZE * (parameters.PADDLE_SIZE - 1) and abs(ball.xcor() - left_paddle.xcor()) == parameters.BALL_SIZE and ball.xcor() > left_paddle.xcor():
+        ball.bounce_x()
 
     # Detect miss by right paddle
     if ball.xcor() > parameters.RIGHT_BOUNDARY:
