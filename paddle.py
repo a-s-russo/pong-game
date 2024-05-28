@@ -18,8 +18,10 @@ class Paddle(Turtle):
 
     def up(self):
         new_y = self.ycor() + 20
-        self.goto(self.xcor(), new_y)
+        if new_y <= parameters.TOP_BOUNDARY - parameters.BALL_SIZE * (round(parameters.PADDLE_SIZE / 2) + 1):
+            self.goto(self.xcor(), new_y)
 
     def down(self):
         new_y = self.ycor() - 20
-        self.goto(self.xcor(), new_y)
+        if new_y >= parameters.BOTTOM_BOUNDARY + parameters.BALL_SIZE * (round(parameters.PADDLE_SIZE / 2) + 1):
+            self.goto(self.xcor(), new_y)
