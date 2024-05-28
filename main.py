@@ -57,15 +57,31 @@ while True:
     if ball.ycor() > parameters.TOP_BOUNDARY - parameters.BALL_SIZE or ball.ycor() < parameters.BOTTOM_BOUNDARY + parameters.BALL_SIZE:
         ball.bounce_y()
 
-    # Detect collision between ball and right paddle
+    # Detect collision between ball and right paddle's side
     if ball.distance(
             right_paddle) <= parameters.BALL_SIZE * (parameters.PADDLE_SIZE - 1) and abs(ball.xcor() - right_paddle.xcor()) == parameters.BALL_SIZE and ball.xcor() < right_paddle.xcor():
         ball.bounce_x()
 
-    # Detect collision between ball and left paddle
+    # Detect collision between ball and right paddle's top
+    if ball.xcor() == right_paddle.xcor() and ball.ycor() == right_paddle.ycor() + parameters.BALL_SIZE * (round(parameters.PADDLE_SIZE / 2) + 1) and ball.y_move < 0:
+        ball.bounce_y()
+
+    # Detect collision between ball and right paddle's bottom
+    if ball.xcor() == right_paddle.xcor() and ball.ycor() == right_paddle.ycor() - parameters.BALL_SIZE * (round(parameters.PADDLE_SIZE / 2) + 1) and ball.y_move > 0:
+        ball.bounce_y()
+
+    # Detect collision between ball and left paddle's side
     if ball.distance(
             left_paddle) <= parameters.BALL_SIZE * (parameters.PADDLE_SIZE - 1) and abs(ball.xcor() - left_paddle.xcor()) == parameters.BALL_SIZE and ball.xcor() > left_paddle.xcor():
         ball.bounce_x()
+
+    # Detect collision between ball and left paddle's top
+    if ball.xcor() == left_paddle.xcor() and ball.ycor() == left_paddle.ycor() + parameters.BALL_SIZE * (round(parameters.PADDLE_SIZE / 2) + 1) and ball.y_move < 0:
+        ball.bounce_y()
+
+    # Detect collision between ball and left paddle's bottom
+    if ball.xcor() == left_paddle.xcor() and ball.ycor() == left_paddle.ycor() - parameters.BALL_SIZE * (round(parameters.PADDLE_SIZE / 2) + 1) and ball.y_move > 0:
+        ball.bounce_y()
 
     # Detect miss by right paddle
     if ball.xcor() > parameters.RIGHT_BOUNDARY:
