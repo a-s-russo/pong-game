@@ -12,11 +12,11 @@ class Scoreboard(Turtle):
         self.hideturtle()
         self.score = 0
         if self.side == 'left':
-            self.goto(0 - parameters.BALL_SIZE * 5,
-                      parameters.TOP_BOUNDARY - parameters.BALL_SIZE * 6)
+            self.goto(0 - parameters.BALL_SHAPE_SIZE * 5,
+                      parameters.TOP_BOUNDARY - parameters.BALL_SHAPE_SIZE * 6)
         else:
-            self.goto(0 + parameters.BALL_SIZE * 5,
-                      parameters.TOP_BOUNDARY - parameters.BALL_SIZE * 6)
+            self.goto(0 + parameters.BALL_SHAPE_SIZE * 5,
+                      parameters.TOP_BOUNDARY - parameters.BALL_SHAPE_SIZE * 6)
         self.update_scoreboard()
 
     def update_scoreboard(self):
