@@ -48,7 +48,8 @@ left_paddle_scoreboard = scoreboard.Scoreboard('left')
 right_paddle_scoreboard = scoreboard.Scoreboard('right')
 
 # Simulate game
-while True:
+game_is_on = True
+while game_is_on:
     time.sleep(0.1)
     screen.update()
     ball.move()
@@ -92,11 +93,17 @@ while True:
     # Detect miss by right paddle
     if ball.xcor() > parameters.RIGHT_BOUNDARY:
         left_paddle_scoreboard.increase_score()
+        if left_paddle_scoreboard.score == parameters.SCORE_LIMIT:
+            left_paddle_scoreboard.win_game()
+            game_is_on = False
         ball.restart()
 
     # Detect miss by left paddle
     if ball.xcor() < parameters.LEFT_BOUNDARY:
         right_paddle_scoreboard.increase_score()
+        if right_paddle_scoreboard.score == parameters.SCORE_LIMIT:
+            right_paddle_scoreboard.win_game()
+            game_is_on = False
         ball.restart()
 
 screen.exitonclick()

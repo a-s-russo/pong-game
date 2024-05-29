@@ -21,9 +21,18 @@ class Scoreboard(Turtle):
 
     def update_scoreboard(self):
         self.write(f'{self.score}', align=parameters.ALIGNMENT,
-                   font=parameters.FONT)
+                   font=parameters.SCORE_FONT)
 
     def increase_score(self):
         self.score += 1
         self.clear()
         self.update_scoreboard()
+
+    def win_game(self):
+        if self.side == 'left':
+            x_cor = 0 - (parameters.WIDTH / 4)
+        if self.side == 'right':
+            x_cor = 0 + (parameters.WIDTH / 4)
+        self.goto(x_cor, 0)
+        self.write(f'{self.side.title()}\nwins!',
+                   align=parameters.ALIGNMENT, font=parameters.WINNER_FONT)
